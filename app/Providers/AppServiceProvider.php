@@ -13,7 +13,9 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(
             \App\Services\Otp\OtpServiceInterface::class,
-            \App\Services\Otp\MockOtpService::class
+            config('services.otp.provider', 'mock') === 'fonnte'
+                ? \App\Services\Otp\FonnteOtpService::class
+                : \App\Services\Otp\MockOtpService::class
         );
     }
 

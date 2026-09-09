@@ -35,4 +35,13 @@ return [
         ],
     ],
 
+    'otp' => [
+        'provider' => env('OTP_PROVIDER', 'mock'),
+    ],
+
+    'fonnte' => [
+        'token' => env('FONNTE_TOKEN'),
+        'url' => env('FONNTE_URL', 'https://api.fonnte.com/send'),
+    ],
+
 ];
