@@ -206,10 +206,19 @@ class AuthController extends Controller
     public function forgotPassword(Request $request)
     {
         $request->validate([
-            'phone' => 'required|string|exists:users,phone',
+            'phone' => 'required|string',
         ]);
 
-        $res = $this->otpService->sendOtp($request->input('phone'), 'FORGOT_PASSWORD');
+        $phone = $this->normalizePhone($request->input('phone'));
+        $phoneVariants = $this->phoneVariants($phone);
+        if (!User::whereIn('phone', $phoneVariants)->exists()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Nomor HP belum terdaftar.',
+            ], 422);
+        }
+
+        $res = $this->otpService->sendOtp($phone, 'FORGOT_PASSWORD');
 
         return response()->json([
             'status' => 'success',
@@ -221,12 +230,13 @@ class AuthController extends Controller
     public function resetPassword(Request $request)
     {
         $validated = $request->validate([
-            'phone' => 'required|string|exists:users,phone',
+            'phone' => 'required|string',
             'otp_code' => 'required|string|size:6',
             'new_password' => 'required|string|min:6',
         ]);
 
-        $valid = $this->otpService->verifyOtp($validated['phone'], $validated['otp_code'], 'FORGOT_PASSWORD');
+        $phone = $this->normalizePhone($validated['phone']);
+        $valid = $this->otpService->verifyOtp($phone, $validated['otp_code'], 'FORGOT_PASSWORD');
 
         if (!$valid) {
             return response()->json([
@@ -235,7 +245,7 @@ class AuthController extends Controller
             ], 422);
         }
 
-        $user = User::where('phone', $validated['phone'])->firstOrFail();
+        $user = User::whereIn('phone', $this->phoneVariants($phone))->firstOrFail();
         $user->update(['password' => Hash::make($validated['new_password'])]);
         $user->tokens()->delete();
 
@@ -243,5 +253,27 @@ class AuthController extends Controller
             'status' => 'success',
             'message' => 'Kata sandi Anda berhasil diperbarui. Silakan login kembali.',
         ]);
+    }
+
+    private function normalizePhone(string $phone): string
+    {
+        $normalizedPhone = preg_replace('/\D+/', '', $phone) ?? '';
+
+        if (str_starts_with($normalizedPhone, '0')) {
+            $normalizedPhone = '62' . substr($normalizedPhone, 1);
+        } elseif (str_starts_with($normalizedPhone, '8')) {
+            $normalizedPhone = '62' . $normalizedPhone;
+        }
+
+        return $normalizedPhone;
+    }
+
+    private function phoneVariants(string $normalizedPhone): array
+    {
+        $localPhone = str_starts_with($normalizedPhone, '62')
+            ? '0' . substr($normalizedPhone, 2)
+            : $normalizedPhone;
+
+        return array_values(array_unique([$normalizedPhone, $localPhone]));
     }
 }
