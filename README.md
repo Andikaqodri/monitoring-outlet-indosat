@@ -21,6 +21,39 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
+## Project Structure
+
+This repository contains both parts of the application:
+
+- Laravel API backend at the repository root.
+- Flutter application in `Custodia_new/`.
+
+Clone or pull this repository once to get both projects. Backend commands run
+from the repository root; Flutter commands run from `Custodia_new/`.
+
+### Backend Setup
+
+```powershell
+copy .env.example .env
+composer install
+php artisan key:generate
+php artisan migrate
+php artisan serve
+```
+
+Set `FONNTE_TOKEN` in `.env` to a valid Fonnte token when WhatsApp OTP is
+enabled. Keep `.env` local and never commit it.
+
+### Flutter Setup
+
+```powershell
+cd Custodia_new
+flutter pub get
+flutter run -d chrome
+```
+
+The Flutter Web build expects the Laravel API at `http://localhost:8000`.
+
 ## Learning Laravel
 
 Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.

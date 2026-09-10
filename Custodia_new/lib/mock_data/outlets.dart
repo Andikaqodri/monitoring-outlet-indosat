@@ -1,0 +1,20 @@
+import 'package:custodiaa/models/outlet_model.dart';
+
+const List<Outlet> daftarOutlet = [
+  Outlet(id: 'OUT-001', nama: 'Indosat Mall Kelapa Gading', bsm: 'Jakarta Utara', kota: 'Jakarta', kategori: Kategori.pemain, stokAwal: 100, stokIccid: 12, transaksi: 48, loginCount: 32, rewardClaimed: 41, lastActivity: '2 menit lalu', x: 22, y: 18),
+  Outlet(id: 'OUT-002', nama: 'Indosat Grand Indonesia', bsm: 'Jakarta Pusat', kota: 'Jakarta', kategori: Kategori.pemain, stokAwal: 120, stokIccid: 28, transaksi: 41, loginCount: 28, rewardClaimed: 36, lastActivity: '8 menit lalu', x: 18, y: 30),
+  Outlet(id: 'OUT-003', nama: 'Indosat Galaxy Mall', bsm: 'Surabaya Timur', kota: 'Surabaya', kategori: Kategori.pemain, stokAwal: 100, stokIccid: 20, transaksi: 35, loginCount: 27, rewardClaimed: 30, lastActivity: '15 menit lalu', x: 86, y: 58),
+  Outlet(id: 'OUT-004', nama: 'Indosat Tunjungan Plaza', bsm: 'Surabaya Pusat', kota: 'Surabaya', kategori: Kategori.pemain, stokAwal: 90, stokIccid: 15, transaksi: 39, loginCount: 25, rewardClaimed: 33, lastActivity: '20 menit lalu', x: 78, y: 55),
+  Outlet(id: 'OUT-005', nama: 'Indosat Kota Kasablanka', bsm: 'Jakarta Selatan', kota: 'Jakarta', kategori: Kategori.reaktif, stokAwal: 90, stokIccid: 38, transaksi: 25, loginCount: 20, rewardClaimed: 19, lastActivity: '1 jam lalu', x: 16, y: 38),
+  Outlet(id: 'OUT-006', nama: 'Indosat Puri Indah Mall', bsm: 'Jakarta Barat', kota: 'Jakarta', kategori: Kategori.reaktif, stokAwal: 85, stokIccid: 42, transaksi: 21, loginCount: 16, rewardClaimed: 15, lastActivity: '1 jam lalu', x: 8, y: 26),
+  Outlet(id: 'OUT-007', nama: 'Indosat Paris Van Java', bsm: 'Bandung Barat', kota: 'Bandung', kategori: Kategori.reaktif, stokAwal: 100, stokIccid: 45, transaksi: 22, loginCount: 18, rewardClaimed: 17, lastActivity: '2 jam lalu', x: 42, y: 48),
+  Outlet(id: 'OUT-008', nama: 'Indosat Cihampelas Walk', bsm: 'Bandung Utara', kota: 'Bandung', kategori: Kategori.reaktif, stokAwal: 110, stokIccid: 52, transaksi: 19, loginCount: 15, rewardClaimed: 13, lastActivity: '3 jam lalu', x: 44, y: 52),
+  Outlet(id: 'OUT-009', nama: 'Indosat Cibubur Junction', bsm: 'Jakarta Timur', kota: 'Jakarta', kategori: Kategori.reaktif, stokAwal: 75, stokIccid: 35, transaksi: 16, loginCount: 12, rewardClaimed: 11, lastActivity: '4 jam lalu', x: 32, y: 30),
+  Outlet(id: 'OUT-010', nama: 'Indosat Plaza Ambarrukmo', bsm: 'Yogyakarta', kota: 'Yogyakarta', kategori: Kategori.reaktif, stokAwal: 80, stokIccid: 40, transaksi: 18, loginCount: 14, rewardClaimed: 12, lastActivity: '5 jam lalu', x: 55, y: 62),
+  Outlet(id: 'OUT-011', nama: 'Indosat Bintaro Xchange', bsm: 'Tangerang', kota: 'Tangerang', kategori: Kategori.pasif, stokAwal: 100, stokIccid: 78, transaksi: 6, loginCount: 9, rewardClaimed: 4, lastActivity: '1 hari lalu', x: 10, y: 34),
+  Outlet(id: 'OUT-012', nama: 'Indosat Summarecon Bekasi', bsm: 'Bekasi', kota: 'Bekasi', kategori: Kategori.pasif, stokAwal: 120, stokIccid: 82, transaksi: 4, loginCount: 5, rewardClaimed: 2, lastActivity: '2 hari lalu', x: 30, y: 24),
+  Outlet(id: 'OUT-013', nama: 'Indosat Pasar Atom', bsm: 'Surabaya Utara', kota: 'Surabaya', kategori: Kategori.pasif, stokAwal: 80, stokIccid: 65, transaksi: 8, loginCount: 7, rewardClaimed: 3, lastActivity: '1 hari lalu', x: 82, y: 50),
+  Outlet(id: 'OUT-014', nama: 'Indosat Depok Town Square', bsm: 'Depok', kota: 'Depok', kategori: Kategori.pasif, stokAwal: 70, stokIccid: 58, transaksi: 5, loginCount: 6, rewardClaimed: 2, lastActivity: '2 hari lalu', x: 22, y: 44),
+  Outlet(id: 'OUT-015', nama: 'Indosat Bandung Indah Plaza', bsm: 'Bandung Selatan', kota: 'Bandung', kategori: Kategori.pasif, stokAwal: 95, stokIccid: 72, transaksi: 7, loginCount: 8, rewardClaimed: 5, lastActivity: '3 hari lalu', x: 46, y: 56),
+  Outlet(id: 'OUT-016', nama: 'Indosat Marvell City', bsm: 'Surabaya Selatan', kota: 'Surabaya', kategori: Kategori.pasif, stokAwal: 75, stokIccid: 60, transaksi: 3, loginCount: 4, rewardClaimed: 1, lastActivity: '5 hari lalu', x: 74, y: 62),
+];
