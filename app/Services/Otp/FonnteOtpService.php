@@ -5,6 +5,7 @@ namespace App\Services\Otp;
 use App\Models\Otp;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use RuntimeException;
 
 class FonnteOtpService implements OtpServiceInterface
@@ -27,7 +28,20 @@ class FonnteOtpService implements OtpServiceInterface
 
         $responseData = $response->json();
         if (!$response->successful() || ($responseData['status'] ?? true) === false) {
-            throw new RuntimeException('OTP gagal dikirim ke WhatsApp. Silakan coba lagi.');
+            Log::error('Fonnte rejected OTP request', [
+                'http_status' => $response->status(),
+                'response' => $responseData ?? $response->body(),
+            ]);
+
+            $providerMessage = is_array($responseData)
+                ? ($responseData['reason'] ?? $responseData['message'] ?? null)
+                : null;
+
+            throw new RuntimeException(
+                $providerMessage
+                    ? "OTP gagal dikirim: {$providerMessage}"
+                    : 'OTP gagal dikirim ke WhatsApp. Silakan coba lagi.'
+            );
         }
 
         Otp::create([
