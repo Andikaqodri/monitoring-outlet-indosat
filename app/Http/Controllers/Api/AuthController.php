@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\ActivityLog;
+use App\Models\Otp;
 use App\Models\User;
 use App\Models\UserOutlet;
 use App\Services\Otp\OtpServiceInterface;
@@ -236,7 +237,12 @@ class AuthController extends Controller
         ]);
 
         $phone = $this->normalizePhone($validated['phone']);
-        $valid = $this->otpService->verifyOtp($phone, $validated['otp_code'], 'FORGOT_PASSWORD');
+        $valid = Otp::where('phone', $phone)
+            ->where('type', 'FORGOT_PASSWORD')
+            ->where('otp_code', $validated['otp_code'])
+            ->where('is_verified', true)
+            ->where('expires_at', '>=', now())
+            ->exists();
 
         if (!$valid) {
             return response()->json([
@@ -248,6 +254,10 @@ class AuthController extends Controller
         $user = User::whereIn('phone', $this->phoneVariants($phone))->firstOrFail();
         $user->update(['password' => Hash::make($validated['new_password'])]);
         $user->tokens()->delete();
+        Otp::where('phone', $phone)
+            ->where('type', 'FORGOT_PASSWORD')
+            ->where('otp_code', $validated['otp_code'])
+            ->delete();
 
         return response()->json([
             'status' => 'success',
