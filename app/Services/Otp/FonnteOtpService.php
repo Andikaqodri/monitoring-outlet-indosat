@@ -14,8 +14,8 @@ class FonnteOtpService implements OtpServiceInterface
     {
         $normalizedPhone = $this->normalizePhone($phone);
         $code = (string) random_int(100000, 999999);
-        $expiresAt = Carbon::now()->addMinutes(10);
-        $message = "Kode OTP Anda: {$code}. Berlaku selama 10 menit. Jangan berikan kode ini kepada siapa pun.";
+        $expiresAt = Carbon::now()->addMinutes(3);
+        $message = "Kode OTP Anda: {$code}. Berlaku selama 3 menit. Jangan berikan kode ini kepada siapa pun.";
 
         $response = Http::asForm()
             ->withHeaders([

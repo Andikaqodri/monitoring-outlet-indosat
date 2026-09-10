@@ -12,7 +12,7 @@ class MockOtpService implements OtpServiceInterface
     {
         // In development/mock mode: produce 6-digit OTP code (e.g. 123456 or random)
         $code = config('app.env') === 'production' ? (string) random_int(100000, 999999) : '123456';
-        $expiresAt = Carbon::now()->addMinutes(10);
+        $expiresAt = Carbon::now()->addMinutes(3);
 
         Otp::create([
             'phone' => $phone,
